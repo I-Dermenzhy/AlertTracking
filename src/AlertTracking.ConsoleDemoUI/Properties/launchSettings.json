@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Profile 1": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "AUTHORIZATION_TOKEN": "0a5925dd:cc14b508cd7ebefe6cc6b207d72e96ea"
+      },
+      "authenticationMode": "Windows"
+    }
+  }
+}
