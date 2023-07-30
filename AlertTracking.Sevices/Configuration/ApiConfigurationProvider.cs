@@ -1,5 +1,5 @@
 ﻿using AlertTracking.Abstractions.Configuration;
-using AlertTracking.Domain.Dtos;
+using AlertTracking.Abstractions.Exceptions;
 
 using Microsoft.Extensions.Configuration;
 
@@ -13,18 +13,18 @@ public class ApiConfigurationProvider : IApiConfigurationProvider
         _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
     public string GetApiAuthorizationToken() => _configuration["AUTHORIZATION_TOKEN"] ??
-        throw new InvalidOperationException("'AUTHORIZATION_TOKEN' is missed in the environment variables");
+        throw new MissedConfigurationException(_configuration, "AUTHORIZATION_TOKEN");
 
     public Endpoints GetApiEndpoints()
     {
         var endpoints = _configuration.GetSection("UkraineAlertApi:Endpoints").Get<Endpoints>();
-        return endpoints ?? throw new InvalidOperationException("UkraineAlertApi:Endpoints configuration is missing or invalid.");
+        return endpoints ?? throw new MissedConfigurationException(_configuration, "UkraineAlertApi:Endpoints");
     }
 
     public string GetApiUrl()
     {
         return _configuration.GetValue<string>("UkraineAlertApi:Url") ??
-            throw new InvalidOperationException("UkraineAlertApi:Url configuration is missing or invalid.");
+            throw new MissedConfigurationException(_configuration, "UkraineAlertApi:Url");
     }
 
     public Dictionary<string, string> GetRegionNameIdPairs()
@@ -32,7 +32,7 @@ public class ApiConfigurationProvider : IApiConfigurationProvider
         var regionIdsSection = _configuration.GetSection("UkraineAlertApi:RegionIds");
 
         if (!regionIdsSection.GetChildren().Any())
-            throw new InvalidOperationException("UkraineAlertApi:RegionIds configuration is missing or invalid.");
+            throw new MissedConfigurationException(_configuration, "UkraineAlertApi:RegionIds");
 
         var regionIds = new Dictionary<string, string>();
 
@@ -42,7 +42,7 @@ public class ApiConfigurationProvider : IApiConfigurationProvider
             var regionIdValue = regionId.Value;
 
             if (string.IsNullOrEmpty(regionIdValue))
-                throw new InvalidOperationException($"Region ID value is missing or invalid for region: {regionName}");
+                throw new MissedConfigurationException(_configuration, $"UkraineAlertApi:RegionIds:{regionName}");
 
             regionIds.Add(regionName, regionIdValue);
         }
@@ -52,12 +52,10 @@ public class ApiConfigurationProvider : IApiConfigurationProvider
 
     public string GetRegionId(string regionName)
     {
-        Dictionary<string, string> regionIds = GetRegionNameIdPairs();
+        var regionIdsSection = _configuration.GetSection("UkraineAlertApi:RegionIds");
 
-        if (!regionIds.ContainsKey(regionName))
-            throw new InvalidOperationException($"Region ID value is missing or invalid for region: {regionName}");
-
-        return regionIds[regionName];
+        return regionIdsSection.GetValue<string>(regionName) ??
+            throw new MissedConfigurationException(_configuration, $"UkraineAlertApi:RegionIds:{regionName}");
     }
 
     public IEnumerable<string> GetRegionNames()

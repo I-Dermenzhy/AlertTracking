@@ -1,5 +1,5 @@
 ﻿using AlertTracking.Abstractions.DataAccess.Repositories;
-using AlertTracking.Monitors;
+using AlertTracking.Services.Monitors;
 
 using Moq;
 

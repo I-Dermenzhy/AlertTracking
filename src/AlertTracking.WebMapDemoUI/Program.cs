@@ -1,7 +1,10 @@
 using AlertTracking.Services;
+using AlertTracking.Shared;
+using AlertTracking.WebMapDemoUI.Extensions;
 using AlertTracking.WebMapDemoUI.Hubs;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args)
+    .AddSharedConfiguration();
 
 ConfigureServices(builder.Services);
 

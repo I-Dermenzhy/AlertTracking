@@ -28,7 +28,7 @@ public class Alert
     }
 
     [JsonPropertyName("regionId")]
-    public required string RegionId { get; init; }
+    public required string RegionId { get; set; }
 
     [JsonPropertyName("type")]
     public required string Type { get; init; }

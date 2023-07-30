@@ -1,5 +1,6 @@
 ﻿using AlertTracking.ConsoleDemoUI;
 using AlertTracking.Services;
+using AlertTracking.Shared;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,10 +25,15 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
         })
         .ConfigureAppConfiguration((hostingContext, config) =>
         {
+            var env = hostingContext.HostingEnvironment;
+
             config
                 .AddEnvironmentVariables()
                 .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddSharedConfiguration();
+
         })
         .ConfigureServices((hostContext, services) =>
         {

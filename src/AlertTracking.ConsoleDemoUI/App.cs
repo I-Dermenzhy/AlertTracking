@@ -1,5 +1,5 @@
 ﻿using AlertTracking.Abstractions.Monitors;
-using AlertTracking.Domain.Dtos;
+using AlertTracking.Domain.Models;
 
 using Microsoft.Extensions.Configuration;
 
@@ -54,18 +54,17 @@ internal sealed class App
     private static void DisplaySeparator() => Console.WriteLine(string.Join("", Enumerable.Repeat(".", 55)));
     private static void DisplayHelloMessage() => Console.WriteLine("Welcome to the alert tracking app!");
 
-    private static void LogAlertStatusToConsole(RegionAlertArgs args)
+    private static void LogAlertStatusToConsole(Region region)
     {
-        string regionName = args.RegionName;
-        bool isAlert = args.IsAlert;
+        bool isAlert = region.IsAlert;
 
-        string logMessage = isAlert
-            ? $"There is an air alert in {regionName}!\nLocal time: {DateTime.Now:HH:mm:ss}\n"
-            : $"There is no air alerts in {regionName}.\nLocal time: {DateTime.Now:HH:mm:ss}\n";
+        string logMessage = isAlert ?
+            $"There is an air alert in {region.Name}!\nLocal time: {DateTime.Now:HH:mm:ss}\n" :
+            $"There is no air alerts in {region.Name}.\nLocal time: {DateTime.Now:HH:mm:ss}\n";
 
-        Console.ForegroundColor = isAlert
-            ? ConsoleColor.DarkRed
-            : ConsoleColor.Green;
+        Console.ForegroundColor = isAlert ?
+            ConsoleColor.DarkRed :
+            ConsoleColor.Green;
 
         Console.Clear();
         Console.WriteLine(logMessage);

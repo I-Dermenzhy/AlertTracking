@@ -1,5 +1,5 @@
-﻿const alertColor = "#b80704";
-const nonAlertColor = "#afe892";
+﻿const alertColor = "#e85743";
+const nonAlertColor = "#aee34b";
 const fillOpacity = 0.65;
 const strokeWeight = 0.5;
 

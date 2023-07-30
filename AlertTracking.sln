@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertTracking.WebMapDemoUI"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertTracking.Services.Tests", "tests\AlertTracking.Services.Tests\AlertTracking.Services.Tests.csproj", "{2B8DE5D3-A39D-4F89-98B3-950B84A1E45C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertTracking.Shared", "src\AlertTracking.Shared\AlertTracking.Shared.csproj", "{520ABDD1-435C-404D-B62A-4BDED803777B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{2B8DE5D3-A39D-4F89-98B3-950B84A1E45C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B8DE5D3-A39D-4F89-98B3-950B84A1E45C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B8DE5D3-A39D-4F89-98B3-950B84A1E45C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{520ABDD1-435C-404D-B62A-4BDED803777B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{520ABDD1-435C-404D-B62A-4BDED803777B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{520ABDD1-435C-404D-B62A-4BDED803777B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{520ABDD1-435C-404D-B62A-4BDED803777B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{1214F013-927B-4F93-97A7-BC3E5739408F} = {454E370C-10CB-40F4-90A2-3E9200FABD5A}
 		{BD139AAC-4790-4784-A8EE-CE6D9F2AF286} = {454E370C-10CB-40F4-90A2-3E9200FABD5A}
 		{2B8DE5D3-A39D-4F89-98B3-950B84A1E45C} = {3476B260-A896-4503-85FE-F44CBE1864BA}
+		{520ABDD1-435C-404D-B62A-4BDED803777B} = {454E370C-10CB-40F4-90A2-3E9200FABD5A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E05C2776-FB8B-4677-BE41-CF9BA41F7ED4}

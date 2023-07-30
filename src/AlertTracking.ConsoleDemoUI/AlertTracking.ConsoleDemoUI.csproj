@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\AlertTracking.Sevices\AlertTracking.Sevices.csproj" />
     <ProjectReference Include="..\AlertTracking.Abstractions\AlertTracking.Abstractions.csproj" />
+    <ProjectReference Include="..\AlertTracking.Shared\AlertTracking.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

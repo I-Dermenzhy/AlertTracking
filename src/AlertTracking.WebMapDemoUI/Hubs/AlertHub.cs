@@ -1,5 +1,5 @@
 ﻿using AlertTracking.Abstractions.Monitors;
-using AlertTracking.Domain.Dtos;
+using AlertTracking.Domain.Models;
 
 using Microsoft.AspNetCore.SignalR;
 
@@ -14,7 +14,7 @@ internal sealed class AlertHub : Hub
 
     public async Task SendRegions()
     {
-        IEnumerable<RegionAlertArgs> regions = await _alertMonitor.GetAllRegionsAlertStatusAsync();
+        IEnumerable<Region> regions = await _alertMonitor.GetAllRegionsAlertStatusAsync();
 
         await Clients.All.SendAsync("ReceiveRegions", regions);
     }

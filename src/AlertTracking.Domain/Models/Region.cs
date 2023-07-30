@@ -40,4 +40,6 @@ public class Region
 
     [JsonPropertyName("activeAlerts")]
     public required IEnumerable<Alert> ActiveAlerts { get; init; }
+
+    public bool IsAlert => ActiveAlerts.Any();
 }

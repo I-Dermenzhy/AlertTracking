@@ -1,6 +1,5 @@
 ﻿using AlertTracking.Abstractions.DataAccess.Repositories;
 using AlertTracking.Abstractions.Monitors;
-using AlertTracking.Domain.Dtos;
 using AlertTracking.Domain.Models;
 
 namespace AlertTracking.Services.Monitors;
@@ -14,30 +13,21 @@ public class RegionAlertMonitor : IRegionAlertMonitor
     public RegionAlertMonitor(IAlertApiRepository repository) =>
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
 
-    public event EventHandler<RegionAlertArgs>? RegionAlertChangedWhileTracking;
-    public event EventHandler<RegionAlertArgs>? RegionAlertCheckedWhileTracking;
+    public event EventHandler<Region>? RegionAlertChangedWhileTracking;
+    public event EventHandler<Region>? RegionAlertCheckedWhileTracking;
 
     public IRegionAlertMonitor Clone() => new RegionAlertMonitor(_repository);
 
-    public async Task<IEnumerable<RegionAlertArgs>> GetAllRegionsAlertStatusAsync()
+    public async Task<IEnumerable<Region>> GetAllRegionsAlertStatusAsync()
     {
         IEnumerable<Region> allRegions = await _repository.GetAllRegionsAsync();
         IEnumerable<Region> regionsWithAlerts = await _repository.GetRegionsWithAlertAsync();
 
         return allRegions.Select(region =>
-        {
-            var regionWithAlerts = regionsWithAlerts.FirstOrDefault(r => r.Name == region.Name) ?? region;
-
-            return new RegionAlertArgs(regionWithAlerts, IsAlert(regionWithAlerts));
-        });
+            regionsWithAlerts.FirstOrDefault(r => r.Name == region.Name) ?? region);
     }
 
-    public async Task<IEnumerable<RegionAlertArgs>> GetRegionsWithAlerts()
-    {
-        IEnumerable<Region> regionsWithAlerts = await _repository.GetRegionsWithAlertAsync();
-
-        return regionsWithAlerts.Select(region => new RegionAlertArgs(region, true));
-    }
+    public async Task<IEnumerable<Region>> GetRegionsWithAlerts() => await _repository.GetRegionsWithAlertAsync();
 
     public async Task<bool> GetRegionAlertStatusAsync(string regionName)
     {
@@ -72,8 +62,7 @@ public class RegionAlertMonitor : IRegionAlertMonitor
             {
                 Region region = await GetRegionByNameAsync(regionName);
 
-                RegionAlertArgs eventArgs = new(region, _isAlert);
-                RegionAlertCheckedWhileTracking?.Invoke(this, eventArgs);
+                RegionAlertCheckedWhileTracking?.Invoke(this, region);
 
                 bool isAlert = IsAlert(region);
 
@@ -104,7 +93,6 @@ public class RegionAlertMonitor : IRegionAlertMonitor
     {
         _isAlert = !_isAlert;
 
-        RegionAlertArgs eventArgs = new(region, _isAlert);
-        RegionAlertChangedWhileTracking?.Invoke(this, eventArgs);
+        RegionAlertChangedWhileTracking?.Invoke(this, region);
     }
 }

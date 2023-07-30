@@ -1,16 +1,15 @@
-﻿using AlertTracking.Domain.Dtos;
-using AlertTracking.Domain.Models;
+﻿using AlertTracking.Domain.Models;
 
 namespace AlertTracking.Abstractions.Monitors;
 
 public interface IRegionAlertMonitor : IClonable<IRegionAlertMonitor>
 {
-    event EventHandler<RegionAlertArgs>? RegionAlertChangedWhileTracking;
-    event EventHandler<RegionAlertArgs>? RegionAlertCheckedWhileTracking;
+    event EventHandler<Region>? RegionAlertChangedWhileTracking;
+    event EventHandler<Region>? RegionAlertCheckedWhileTracking;
 
-    Task<IEnumerable<RegionAlertArgs>> GetAllRegionsAlertStatusAsync();
+    Task<IEnumerable<Region>> GetAllRegionsAlertStatusAsync();
 
-    Task<IEnumerable<RegionAlertArgs>> GetRegionsWithAlerts();
+    Task<IEnumerable<Region>> GetRegionsWithAlerts();
 
     Task<bool> GetRegionAlertStatusAsync(string regionName);
     Task<bool> GetRegionAlertStatusAsync(Region region);
