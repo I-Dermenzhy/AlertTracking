@@ -24,6 +24,9 @@ public class AlertApiRepository : IAlertApiRepository
 
     public async Task<Region> GetRegionAsync(string regionName)
     {
+        if (string.IsNullOrWhiteSpace(regionName))
+            throw new ArgumentException($"'{nameof(regionName)}' cannot be null or whitespace.", nameof(regionName));
+
         HttpRequestMessage request = _requestProvider.GetRegionAlertsRequest(regionName);
         HttpResponseMessage response = await SendHttpRequestAsync(request);
 

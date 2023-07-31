@@ -1,8 +1,6 @@
 ﻿using AlertTracking.Abstractions.Exceptions;
 using AlertTracking.Domain.Models;
 
-using System.Text.Json;
-
 namespace AlertTracking.Abstractions.Monitors;
 
 /// <summary>
@@ -45,9 +43,6 @@ public interface IRegionAlertMonitor : IClonable<IRegionAlertMonitor>
     /// <exception cref="HttpRequestException">
     /// Thrown when an error occurs while making an HTTP request to the API for retrieving region alert statuses.
     /// </exception>
-    /// <exception cref="JsonException">
-    /// Thrown if an error occurs while deserializing the API response to <see cref="Region"/> objects.
-    /// </exception>
     Task<IEnumerable<Region>> GetAllRegionsAlertStatusAsync();
 
     /// <summary>
@@ -67,9 +62,6 @@ public interface IRegionAlertMonitor : IClonable<IRegionAlertMonitor>
     /// </exception>
     /// <exception cref="HttpRequestException">
     /// Thrown when an error occurs while making an HTTP request to the API for retrieving regions with active alerts.
-    /// </exception>
-    /// <exception cref="JsonException">
-    /// Thrown if an error occurs while deserializing the API response to <see cref="Region"/> objects.
     /// </exception>
     Task<IEnumerable<Region>> GetRegionsWithAlerts();
 
@@ -92,9 +84,6 @@ public interface IRegionAlertMonitor : IClonable<IRegionAlertMonitor>
     /// </exception>
     /// <exception cref="HttpRequestException">
     /// Thrown when an error occurs while making an HTTP request to the API for retrieving region alert statuses.
-    /// </exception>
-    /// <exception cref="JsonException">
-    /// Thrown if an error occurs while deserializing the API response to <see cref="Region"/> objects.
     /// </exception>
     Task<bool> GetRegionAlertStatusAsync(string regionName);
 
@@ -143,9 +132,6 @@ public interface IRegionAlertMonitor : IClonable<IRegionAlertMonitor>
     /// <exception cref="HttpRequestException">
     /// Thrown when an error occurs while making an HTTP request to the API for retrieving region alert statuses.
     /// </exception>
-    /// <exception cref="JsonException">
-    /// Thrown if an error occurs while deserializing the API response to <see cref="Region"/> objects.
-    /// </exception>
     /// <seealso cref="RegionAlertChangedWhileTracking"/>
     /// <seealso cref="RegionAlertCheckedWhileTracking"/>
     Task StartTrackingAsync(string regionName, int intervalMilliseconds, CancellationToken token);
@@ -178,9 +164,6 @@ public interface IRegionAlertMonitor : IClonable<IRegionAlertMonitor>
     /// </exception>
     /// <exception cref="HttpRequestException">
     /// Thrown when an error occurs while making an HTTP request to the API for retrieving region alert statuses.
-    /// </exception>
-    /// <exception cref="JsonException">
-    /// Thrown if an error occurs while deserializing the API response to <see cref="Region"/> objects.
     /// </exception>
     /// <seealso cref="RegionAlertChangedWhileTracking"/>
     /// <seealso cref="RegionAlertCheckedWhileTracking"/>
