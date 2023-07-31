@@ -30,16 +30,16 @@ public class Region
     }
 
     [JsonPropertyName("regionId")]
-    public required string Id { get; init; }
+    public required string Id { get; set; }
 
     [JsonPropertyName("regionName")]
-    public required string Name { get; init; }
+    public required string Name { get; set; }
 
     [JsonPropertyName("regionType")]
-    public required string Type { get; init; }
+    public required string Type { get; set; }
 
     [JsonPropertyName("activeAlerts")]
-    public required IEnumerable<Alert> ActiveAlerts { get; init; }
+    public required IEnumerable<Alert> ActiveAlerts { get; set; }
 
     public bool IsAlert => ActiveAlerts.Any();
 }

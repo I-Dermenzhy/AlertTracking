@@ -35,12 +35,17 @@ internal sealed class StatusUpdatesMonitorTests
         bool statusUpdatedInvoked = false;
         _monitor.StatusUpdated += (sender, args) => statusUpdatedInvoked = true;
 
-        await _monitor.StartTrackingAsync(intervalMilliseconds, cancellationTokenSource.Token);
+        Task trackingTask = _monitor.StartTrackingAsync(intervalMilliseconds, cancellationTokenSource.Token);
+
+        await Task.Delay(400);
 
         _repositoryMock.Setup(r => r.GetLastActionIndexAsync())
             .ReturnsAsync(updatedActionIndex);
 
-        await _monitor.StartTrackingAsync(intervalMilliseconds, cancellationTokenSource.Token);
+        await Task.Delay(400);
+
+        cancellationTokenSource.Cancel();
+        await trackingTask;
 
         Assert.That(statusUpdatedInvoked, Is.True);
     }
@@ -59,12 +64,17 @@ internal sealed class StatusUpdatesMonitorTests
         bool statusUpdatedInvoked = false;
         _monitor.StatusUpdated += (sender, args) => statusUpdatedInvoked = true;
 
-        await _monitor.StartTrackingAsync(intervalMilliseconds, cancellationTokenSource.Token);
+        Task trackingTask = _monitor.StartTrackingAsync(intervalMilliseconds, cancellationTokenSource.Token);
+
+        await Task.Delay(400);
 
         _repositoryMock.Setup(r => r.GetLastActionIndexAsync())
             .ReturnsAsync(actionIndex);
 
-        await _monitor.StartTrackingAsync(intervalMilliseconds, cancellationTokenSource.Token);
+        await Task.Delay(400);
+
+        cancellationTokenSource.Cancel();
+        await trackingTask;
 
         Assert.That(statusUpdatedInvoked, Is.False);
     }

@@ -82,11 +82,6 @@ public record Endpoints(
     string RegionsWithAlerts,
 
     /// <summary>
-    /// Gets the relative endpoint for retrieving region history.
-    /// </summary>
-    string RegionHistory,
-
-    /// <summary>
     /// Gets the relative endpoint for retrieving status information.
     /// </summary>
     string Status,
@@ -94,10 +89,5 @@ public record Endpoints(
     /// <summary>
     /// Gets the relative endpoint for retrieving regions information.
     /// </summary>
-    string Regions,
-
-    /// <summary>
-    /// Gets the relative endpoint for webhook integration.
-    /// </summary>
-    string Webhook
+    string Regions
 );

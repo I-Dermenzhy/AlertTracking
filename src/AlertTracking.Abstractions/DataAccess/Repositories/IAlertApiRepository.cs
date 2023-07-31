@@ -3,7 +3,7 @@
 namespace AlertTracking.Abstractions.DataAccess.Repositories;
 
 /// <summary>
-/// Represents a repository for retrieving alert-related data from the API (https://api.ukrainealarm.com/).
+/// Represents a repository for retrieving alert-related data from the Web API (https://api.ukrainealarm.com/).
 /// </summary>
 public interface IAlertApiRepository
 {

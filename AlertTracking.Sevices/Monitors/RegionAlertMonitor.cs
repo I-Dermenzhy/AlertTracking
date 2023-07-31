@@ -48,8 +48,6 @@ public class RegionAlertMonitor : IRegionAlertMonitor
 
     public async Task StartTrackingAsync(string regionName, int intervalMilliseconds, CancellationToken token)
     {
-        ArgumentNullException.ThrowIfNull(token, nameof(token));
-
         if (string.IsNullOrWhiteSpace(regionName))
             throw new ArgumentException($"'{nameof(regionName)}' cannot be null or whitespace.", nameof(regionName));
 

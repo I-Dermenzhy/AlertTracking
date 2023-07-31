@@ -16,6 +16,4 @@ public interface IRegionAlertMonitor : IClonable<IRegionAlertMonitor>
 
     Task StartTrackingAsync(string regionName, int intervalMilliseconds, CancellationToken token);
     Task StartTrackingAsync(Region region, int intervalMilliseconds, CancellationToken token);
-
-    //Task StartTrackingAsync(int intervalMilliseconds, CancellationToken token);
 }

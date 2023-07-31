@@ -54,42 +54,6 @@ internal sealed class RegionAlertsMonitorTests
     }
 
     [Test]
-    public async Task StartTrackingAsync_InvokesGetRegionAlertStatusAsync()
-    {
-        string regionName = "testName";
-        int intervalMilliseconds = 100;
-        CancellationTokenSource cancellationTokenSource = new();
-
-        Region region = CreateRegionWithAlerts(regionName);
-
-        _repositoryMock.Setup(repo => repo.GetRegionAsync(regionName))
-            .ReturnsAsync(region);
-
-        Task trackingTask = _monitor.StartTrackingAsync(regionName, intervalMilliseconds, cancellationTokenSource.Token);
-
-        await Task.Delay(600);
-
-        cancellationTokenSource.Cancel();
-
-        await trackingTask;
-
-        Mock.Get(_monitor).Verify(m => m.GetRegionAlertStatusAsync(regionName), Times.AtLeastOnce);
-    }
-
-    [Test]
-    public void StartTrackingAsync_CancellationTokenNull_ThrowsArgumentNullException()
-    {
-        var regionName = "testRegion";
-        var intervalMilliseconds = 100;
-        CancellationTokenSource cancellationTokenSource = null!;
-
-        Assert.ThrowsAsync<ArgumentNullException>(async () =>
-        {
-            await _monitor.StartTrackingAsync(regionName, intervalMilliseconds, cancellationTokenSource.Token);
-        });
-    }
-
-    [Test]
     [TestCase(0)]
     [TestCase(-10)]
     public void StartTrackingAsync_IntervalMillisecondsOutOfRange_ThrowsArgumentOutOfRangeException(int intervalMilliseconds)

@@ -1,5 +1,4 @@
 ﻿using AlertTracking.Abstractions.Configuration;
-using AlertTracking.Domain.Dtos;
 using AlertTracking.Services.Configuration;
 
 using Microsoft.Extensions.Configuration;
@@ -19,9 +18,11 @@ internal sealed class ApiConfigurationProviderTests
         IConfiguration configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(new[]
             {
-                new KeyValuePair<string, string>("UkraineAlertApi:AuthorizationToken", "testToken"),
+                new KeyValuePair<string, string>("AUTHORIZATION_TOKEN", "testToken"),
                 new KeyValuePair<string, string>("UkraineAlertApi:Url", "testUrl"),
                 new KeyValuePair<string, string>("UkraineAlertApi:Endpoints:RegionsWithAlerts", "testRegionsWithAlerts"),
+                new KeyValuePair<string, string>("UkraineAlertApi:Endpoints:Regions", "testRegions"),
+                new KeyValuePair<string, string>("UkraineAlertApi:Endpoints:Status", "testStatus"),
                 new KeyValuePair<string, string>("UkraineAlertApi:RegionIds:Region1", "5"),
                 new KeyValuePair<string, string>("UkraineAlertApi:RegionIds:Region2", "10"),
             }!)
