@@ -1,21 +1,22 @@
 ﻿using AlertTracking.Abstractions.DataAccess.HttpRequests;
 using AlertTracking.Abstractions.DataAccess.Repositories;
+using AlertTracking.Abstractions.Deserialization;
 using AlertTracking.Domain.Models;
-
-using System.Text.Json;
 
 namespace AlertTracking.Services.DataAccess.Repositories;
 
 public class AlertApiRepository : IAlertApiRepository
 {
     private readonly IApiRequestProvider _requestProvider;
+    private readonly IApiResponseDeserializer _responseDeserializer;
     private readonly IHttpRequestSender _sender;
 
     private readonly string _authorizationToken;
 
-    public AlertApiRepository(IApiRequestProvider requestProvider, IHttpRequestSender sender)
+    public AlertApiRepository(IApiRequestProvider requestProvider, IApiResponseDeserializer responseDeserializer, IHttpRequestSender sender)
     {
         _requestProvider = requestProvider ?? throw new ArgumentNullException(nameof(requestProvider));
+        _responseDeserializer = responseDeserializer ?? throw new ArgumentNullException(nameof(responseDeserializer));
         _sender = sender ?? throw new ArgumentNullException(nameof(sender));
 
         _authorizationToken = _requestProvider.AuthorizationToken;
@@ -28,7 +29,7 @@ public class AlertApiRepository : IAlertApiRepository
 
         response.EnsureSuccessStatusCode();
 
-        return await DeserializeRegionFromResponseAsync(response);
+        return await _responseDeserializer.DeserializeRegionFromResponseAsync(response);
     }
 
     public async Task<IEnumerable<Region>> GetAllRegionsAsync()
@@ -38,7 +39,7 @@ public class AlertApiRepository : IAlertApiRepository
 
         response.EnsureSuccessStatusCode();
 
-        return await DeserializeRegionsFromStatesResponseAsync(response);
+        return await _responseDeserializer.DeserializeRegionsFromStatesResponseAsync(response);
     }
 
     public async Task<IEnumerable<Region>> GetRegionsWithAlertAsync()
@@ -48,7 +49,7 @@ public class AlertApiRepository : IAlertApiRepository
 
         response.EnsureSuccessStatusCode();
 
-        return await DeserializeRegionsFromResponseAsync(response);
+        return await _responseDeserializer.DeserializeRegionsFromResponseAsync(response);
     }
 
     public async Task<long> GetLastActionIndexAsync()
@@ -58,47 +59,9 @@ public class AlertApiRepository : IAlertApiRepository
 
         response.EnsureSuccessStatusCode();
 
-        return await DeserializeLastActionIndexFromResponseAsync(response);
+        return await _responseDeserializer.DeserializeLastActionIndexFromResponseAsync(response);
     }
 
     private async Task<HttpResponseMessage> SendHttpRequestAsync(HttpRequestMessage request) =>
         await _sender.SendHttpRequestAsync(request, _authorizationToken);
-
-    private static async Task<Region> DeserializeRegionFromResponseAsync(HttpResponseMessage response)
-    {
-        var regions = await DeserializeRegionsFromResponseAsync(response);
-
-        return regions?.FirstOrDefault() ??
-            throw new HttpRequestException("An error occurred during the HTTP request");
-    }
-
-    private static async Task<IEnumerable<Region>> DeserializeRegionsFromResponseAsync(HttpResponseMessage response)
-    {
-        using var responseStream = await response.Content.ReadAsStreamAsync();
-
-        return await JsonSerializer.DeserializeAsync<IEnumerable<Region>>(responseStream) ??
-            throw new HttpRequestException("An error occurred during the HTTP request");
-    }
-
-    private static async Task<IEnumerable<Region>> DeserializeRegionsFromStatesResponseAsync(HttpResponseMessage response)
-    {
-        using var responseStream = await response.Content.ReadAsStreamAsync();
-
-        // Api returns a repsonse which consists of a single object called 'States',
-        // which contains an array of regions as its only attribute
-        var statesObject = await JsonSerializer.DeserializeAsync<States>(responseStream) ??
-            throw new HttpRequestException("An error occurred during the HTTP request");
-
-        // A repsonse also contains a test region with an id = "0",
-        // which has to be removed
-        return statesObject.Regions.Where(r => r.Id != "0");
-    }
-
-    private static async Task<long> DeserializeLastActionIndexFromResponseAsync(HttpResponseMessage response)
-    {
-        using var responseStream = await response.Content.ReadAsStreamAsync();
-        var jsonDocument = await JsonDocument.ParseAsync(responseStream);
-
-        return jsonDocument.RootElement.GetProperty("lastActionIndex").GetInt64();
-    }
 }

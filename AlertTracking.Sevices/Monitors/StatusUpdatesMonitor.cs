@@ -16,39 +16,43 @@ public class StatusUpdatesMonitor : IStatusUpdatesMonitor
 
     public async Task CheckStatusUpdatedAsync()
     {
-        long lastActionIndex = await _repository.GetLastActionIndexAsync();
-
-        if (IsLactActionIndexChanged(lastActionIndex))
-            OnLastActionIndexChanged(lastActionIndex);
-    }
-
-    public async Task StartTrackingAsync(int intervalMilliseconds, CancellationToken token)
-    {
-        ArgumentNullException.ThrowIfNull(token, nameof(token));
-
-        if (intervalMilliseconds <= 0)
-            throw new ArgumentOutOfRangeException(nameof(intervalMilliseconds));
-
         try
         {
-            while (!token.IsCancellationRequested)
-            {
-                await CheckStatusUpdatedAsync();
+            long lastActionIndex = await _repository.GetLastActionIndexAsync();
 
-                await Task.Delay(intervalMilliseconds, token);
+            if (IsLactActionIndexChanged(lastActionIndex))
+                OnLastActionIndexChanged(lastActionIndex);
+        }
+        catch
+    }
+
+        public async Task StartTrackingAsync(int intervalMilliseconds, CancellationToken token)
+        {
+            ArgumentNullException.ThrowIfNull(token, nameof(token));
+
+            if (intervalMilliseconds <= 0)
+                throw new ArgumentOutOfRangeException(nameof(intervalMilliseconds));
+
+            try
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    await CheckStatusUpdatedAsync();
+
+                    await Task.Delay(intervalMilliseconds, token);
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                // Tracking was cancelled, ignore the exception
             }
         }
-        catch (OperationCanceledException)
+
+        private void OnLastActionIndexChanged(long lastActionIndex)
         {
-            // Tracking was cancelled, ignore the exception
+            StatusUpdated?.Invoke(this, EventArgs.Empty);
+            _lastActionIndex = lastActionIndex;
         }
-    }
 
-    private void OnLastActionIndexChanged(long lastActionIndex)
-    {
-        StatusUpdated?.Invoke(this, EventArgs.Empty);
-        _lastActionIndex = lastActionIndex;
+        private bool IsLactActionIndexChanged(long lastActionIndex) => lastActionIndex != _lastActionIndex;
     }
-
-    private bool IsLactActionIndexChanged(long lastActionIndex) => lastActionIndex != _lastActionIndex;
-}
