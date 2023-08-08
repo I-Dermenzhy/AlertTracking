@@ -26,7 +26,7 @@ public interface IAlertApiRepository
     /// <exception cref="ArgumentException">Thrown when the provided regionName is null or whitespace.</exception>
     /// <exception cref="HttpRequestException">Thrown when an error occurs during the HTTP request or the response contains no instances of the type 'Region'.</exception>
     /// <exception cref="MissedConfigurationException">Thrown when an error occurs during the accessing API configuration.</exception>
-    /// <exception cref="ResponseDeserializationException">Thrown when an error occurs during the response deserialization.</exception>
+    /// <exception cref="HttpResponseDeserializationException">Thrown when an error occurs during the response deserialization.</exception>
     Task<Region> GetRegionAsync(string regionName);
 
     /// <summary>
@@ -37,7 +37,7 @@ public interface IAlertApiRepository
     /// </returns>
     /// <exception cref="HttpRequestException">Thrown when an error occurs during the HTTP request or the response is not in a valid JSON format.</exception>
     /// <exception cref="MissedConfigurationException">Thrown when an error occurs during the accessing API configuration.</exception>
-    /// <exception cref="ResponseDeserializationException">Thrown when an error occurs during the response deserialization.</exception>
+    /// <exception cref="HttpResponseDeserializationException">Thrown when an error occurs during the response deserialization.</exception>
     Task<IEnumerable<Region>> GetAllRegionsAsync();
 
     /// <summary>
@@ -48,6 +48,6 @@ public interface IAlertApiRepository
     /// </returns>
     /// <exception cref="HttpRequestException">Thrown when an error occurs during the HTTP request or the response is not in a valid JSON format.</exception>
     /// <exception cref="MissedConfigurationException">Thrown when an error occurs during the accessing API configuration.</exception>
-    /// <exception cref="ResponseDeserializationException">Thrown when an error occurs during the response deserialization.</exception>
+    /// <exception cref="HttpResponseDeserializationException">Thrown when an error occurs during the response deserialization.</exception>
     Task<IEnumerable<Region>> GetRegionsWithAlertAsync();
 }

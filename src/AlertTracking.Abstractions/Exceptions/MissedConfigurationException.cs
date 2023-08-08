@@ -46,12 +46,12 @@ public class MissedConfigurationException : InvalidOperationException
     /// <summary>
     /// Gets the <see cref="IConfiguration"/> instance containing the configuration data.
     /// </summary>
-    public IConfiguration Configuration { get; init; }
+    public IConfiguration Configuration { get; }
 
     /// <summary>
     /// Gets the key of the configuration value that is missing.
     /// </summary>
-    public ConfigurationKey MissedConfiguration { get; init; }
+    public ConfigurationKey MissedConfiguration { get; }
 }
 
 /// <summary>

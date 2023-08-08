@@ -10,10 +10,12 @@ ConfigureServices(builder.Services);
 
 var app = builder.Build();
 
-Configure(app);
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+
+Configure(app, logger);
 
 if (app.Environment.IsDevelopment())
-    ConfigureForDevelopment(app);
+    ConfigureForDevelopment(app, logger);
 
 app.Run();
 
@@ -22,10 +24,18 @@ static void ConfigureServices(IServiceCollection services)
     services.AddSignalR();
 
     services.AddAlertTracking();
+
+    services.AddLogging(builder =>
+    {
+        builder.SetMinimumLevel(LogLevel.Information);
+        builder.AddConsole();
+    });
 }
 
-static void Configure(WebApplication app)
+static void Configure(WebApplication app, ILogger<Program> logger)
 {
+    logger.LogInformation("Configuring the application.");
+
     app.UseDefaultFiles();
     app.UseStaticFiles();
 
@@ -34,7 +44,9 @@ static void Configure(WebApplication app)
     app.MapHub<AlertHub>("/alert");
 }
 
-static void ConfigureForDevelopment(WebApplication app)
+static void ConfigureForDevelopment(WebApplication app, ILogger<Program> logger)
 {
+    logger.LogInformation("Configuring for development.");
+
     app.UseDeveloperExceptionPage();
 }

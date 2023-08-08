@@ -30,7 +30,7 @@ public sealed class ApiResponseDeserializer : IApiResponseDeserializer
         }
         catch (Exception ex) when (ex is not HttpRequestException)
         {
-            throw new ResponseDeserializationException(response, ex);
+            throw new HttpResponseDeserializationException(response, ex);
         }
     }
 
@@ -54,7 +54,7 @@ public sealed class ApiResponseDeserializer : IApiResponseDeserializer
         }
         catch (Exception ex) when (ex is not HttpRequestException)
         {
-            throw new ResponseDeserializationException(response, ex);
+            throw new HttpResponseDeserializationException(response, ex);
         }
     }
 
@@ -72,7 +72,7 @@ public sealed class ApiResponseDeserializer : IApiResponseDeserializer
         }
         catch (Exception ex)
         {
-            throw new ResponseDeserializationException(response, ex);
+            throw new HttpResponseDeserializationException(response, ex);
         }
     }
 }
