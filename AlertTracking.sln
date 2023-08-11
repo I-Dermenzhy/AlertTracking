@@ -7,21 +7,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{454E370C-10C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3476B260-A896-4503-85FE-F44CBE1864BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertTracking.Domain", "src\AlertTracking.Domain\AlertTracking.Domain.csproj", "{8043F04A-AF57-4B8A-88DE-D9BB8717296B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlertTracking.Domain", "src\AlertTracking.Domain\AlertTracking.Domain.csproj", "{8043F04A-AF57-4B8A-88DE-D9BB8717296B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertTracking.Abstractions", "src\AlertTracking.Abstractions\AlertTracking.Abstractions.csproj", "{853592BA-987D-45F6-AE11-172841243BEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlertTracking.Abstractions", "src\AlertTracking.Abstractions\AlertTracking.Abstractions.csproj", "{853592BA-987D-45F6-AE11-172841243BEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertTracking.Sevices", "AlertTracking.Sevices\AlertTracking.Sevices.csproj", "{CCE5C923-E29E-4734-A2AE-9F79F9EB20CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlertTracking.ConsoleDemoUI", "src\AlertTracking.ConsoleDemoUI\AlertTracking.ConsoleDemoUI.csproj", "{1214F013-927B-4F93-97A7-BC3E5739408F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertTracking.ConsoleDemoUI", "src\AlertTracking.ConsoleDemoUI\AlertTracking.ConsoleDemoUI.csproj", "{1214F013-927B-4F93-97A7-BC3E5739408F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlertTracking.WebMapDemoUI", "src\AlertTracking.WebMapDemoUI\AlertTracking.WebMapDemoUI.csproj", "{BD139AAC-4790-4784-A8EE-CE6D9F2AF286}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertTracking.WebMapDemoUI", "src\AlertTracking.WebMapDemoUI\AlertTracking.WebMapDemoUI.csproj", "{BD139AAC-4790-4784-A8EE-CE6D9F2AF286}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlertTracking.Services.Tests", "tests\AlertTracking.Services.Tests\AlertTracking.Services.Tests.csproj", "{2B8DE5D3-A39D-4F89-98B3-950B84A1E45C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertTracking.Services.Tests", "tests\AlertTracking.Services.Tests\AlertTracking.Services.Tests.csproj", "{2B8DE5D3-A39D-4F89-98B3-950B84A1E45C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlertTracking.Shared", "src\AlertTracking.Shared\AlertTracking.Shared.csproj", "{520ABDD1-435C-404D-B62A-4BDED803777B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertTracking.Shared", "src\AlertTracking.Shared\AlertTracking.Shared.csproj", "{520ABDD1-435C-404D-B62A-4BDED803777B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlertTracking.Domain.Tests", "tests\AlertTracking.Domain.Tests\AlertTracking.Domain.Tests.csproj", "{2A6DD448-7AE9-432D-83BD-C89621DA0862}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertTracking.Domain.Tests", "tests\AlertTracking.Domain.Tests\AlertTracking.Domain.Tests.csproj", "{2A6DD448-7AE9-432D-83BD-C89621DA0862}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertTracking.Services", "src\AlertTracking.Services\AlertTracking.Services.csproj", "{699C0201-348D-48BC-8003-85F1BE2B22F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +37,6 @@ Global
 		{853592BA-987D-45F6-AE11-172841243BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{853592BA-987D-45F6-AE11-172841243BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{853592BA-987D-45F6-AE11-172841243BEC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CCE5C923-E29E-4734-A2AE-9F79F9EB20CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CCE5C923-E29E-4734-A2AE-9F79F9EB20CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CCE5C923-E29E-4734-A2AE-9F79F9EB20CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CCE5C923-E29E-4734-A2AE-9F79F9EB20CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1214F013-927B-4F93-97A7-BC3E5739408F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1214F013-927B-4F93-97A7-BC3E5739408F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1214F013-927B-4F93-97A7-BC3E5739408F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,6 +57,10 @@ Global
 		{2A6DD448-7AE9-432D-83BD-C89621DA0862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A6DD448-7AE9-432D-83BD-C89621DA0862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A6DD448-7AE9-432D-83BD-C89621DA0862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{699C0201-348D-48BC-8003-85F1BE2B22F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{699C0201-348D-48BC-8003-85F1BE2B22F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{699C0201-348D-48BC-8003-85F1BE2B22F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{699C0201-348D-48BC-8003-85F1BE2B22F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,12 +68,12 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8043F04A-AF57-4B8A-88DE-D9BB8717296B} = {454E370C-10CB-40F4-90A2-3E9200FABD5A}
 		{853592BA-987D-45F6-AE11-172841243BEC} = {454E370C-10CB-40F4-90A2-3E9200FABD5A}
-		{CCE5C923-E29E-4734-A2AE-9F79F9EB20CA} = {454E370C-10CB-40F4-90A2-3E9200FABD5A}
 		{1214F013-927B-4F93-97A7-BC3E5739408F} = {454E370C-10CB-40F4-90A2-3E9200FABD5A}
 		{BD139AAC-4790-4784-A8EE-CE6D9F2AF286} = {454E370C-10CB-40F4-90A2-3E9200FABD5A}
 		{2B8DE5D3-A39D-4F89-98B3-950B84A1E45C} = {3476B260-A896-4503-85FE-F44CBE1864BA}
 		{520ABDD1-435C-404D-B62A-4BDED803777B} = {454E370C-10CB-40F4-90A2-3E9200FABD5A}
 		{2A6DD448-7AE9-432D-83BD-C89621DA0862} = {3476B260-A896-4503-85FE-F44CBE1864BA}
+		{699C0201-348D-48BC-8003-85F1BE2B22F8} = {454E370C-10CB-40F4-90A2-3E9200FABD5A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E05C2776-FB8B-4677-BE41-CF9BA41F7ED4}

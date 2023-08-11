@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AlertTracking.Sevices\AlertTracking.Sevices.csproj" />
     <ProjectReference Include="..\AlertTracking.Abstractions\AlertTracking.Abstractions.csproj" />
+    <ProjectReference Include="..\AlertTracking.Services\AlertTracking.Services.csproj" />
     <ProjectReference Include="..\AlertTracking.Shared\AlertTracking.Shared.csproj" />
   </ItemGroup>
 
