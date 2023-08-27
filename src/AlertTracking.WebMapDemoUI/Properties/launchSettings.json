@@ -13,8 +13,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "AUTHORIZATION_TOKEN": "0a5925dd:cc14b508cd7ebefe6cc6b207d72e96ea"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7234;http://localhost:5164"

@@ -1,9 +1,11 @@
 ﻿using AlertTracking.Abstractions.Configuration;
+using AlertTracking.Abstractions.DataAccess.AzureKeyVaults;
 using AlertTracking.Abstractions.DataAccess.HttpRequests;
 using AlertTracking.Abstractions.DataAccess.Repositories;
 using AlertTracking.Abstractions.Deserialization;
 using AlertTracking.Abstractions.Monitors;
 using AlertTracking.Services.Configuration;
+using AlertTracking.Services.DataAccess.AzureKeyVaults;
 using AlertTracking.Services.DataAccess.HttpRequests;
 using AlertTracking.Services.DataAccess.Repositories;
 using AlertTracking.Services.Monitors;
@@ -15,9 +17,11 @@ namespace AlertTracking.Services;
 
 public static class CompositionRoot
 {
-    public static IServiceCollection AddAlertTracking(this IServiceCollection services) =>
-        services
+    public static IServiceCollection AddAlertTracking(this IServiceCollection services)
+    {
+        return services
             .AddHttpClient()
+            .AddSingleton<IKeyVaultsManager, KeyVaultsManager>()
             .AddSingleton<IApiConfigurationProvider, ApiConfigurationProvider>()
             .AddTransient<IHttpRequestSender, HttpRequestSender>()
             .AddTransient<IApiRequestProvider, ApiRequestProvider>()
@@ -25,4 +29,5 @@ public static class CompositionRoot
             .AddTransient<IAlertApiRepository, AlertApiRepository>()
             .AddTransient<IStatusUpdatesMonitor, StatusUpdatesMonitor>()
             .AddTransient<IRegionAlertMonitor, RegionAlertMonitor>();
+    }
 }

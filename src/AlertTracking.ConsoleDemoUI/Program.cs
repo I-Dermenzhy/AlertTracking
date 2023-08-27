@@ -2,6 +2,7 @@
 using AlertTracking.Services;
 using AlertTracking.Shared;
 
+using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,9 +30,6 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
 
             config
                 .AddEnvironmentVariables()
-                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddSharedConfiguration();
 
         })
@@ -41,4 +39,10 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
                 .AddAlertTracking()
                 .AddSingleton(i => hostContext.Configuration)
                 .AddTransient<App>();
+
+            services.AddAzureClients(ac =>
+            {
+                ac.AddSecretClient(
+                    hostContext.Configuration.GetSection("AzureKeyVaults"));
+            });
         });

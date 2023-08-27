@@ -1,4 +1,7 @@
 {
+  "AzureKeyVaults": {
+    "VaultUri": "https://alert-tracking.vault.azure.net/"
+  },
   "UkraineAlertApi": {
     "Endpoints": {
       "RegionsWithAlerts": "alerts/",

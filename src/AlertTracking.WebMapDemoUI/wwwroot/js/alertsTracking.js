@@ -2,6 +2,8 @@
     .withUrl("/alert")
     .build();
 
+hubConnection.serverTimeoutInMilliseconds = 1000 * 60;
+
 hubConnection.start();
 
 export async function getRegionsWithAlerts() {

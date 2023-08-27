@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\images\alert-stamp.png" />
+    <None Include="wwwroot\config\images\alert-stamp.png" />
     <None Include="wwwroot\index.html" />
     <None Include="wwwroot\js\alertsTracking.js" />
     <None Include="wwwroot\js\regionsStyling.js" />
@@ -21,6 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.21.5" />
+    <PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
